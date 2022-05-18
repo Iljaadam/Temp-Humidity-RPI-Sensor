@@ -12,10 +12,8 @@ import json
 DHTPin = 11     #define the pin of DHT11
 def loop():
     dht = DHT.DHT(DHTPin)   #create a DHT class object
-    counts = 0 # Measurement counts
+     # Measurement counts
     while(True):
-        counts += 1
-        print("Measurement counts: ", counts)
         for i in range(0,15):            
             chk = dht.readDHT11()     #read DHT11 and get a return value. Then determine whether data read is normal according to the return value.
             if (chk is dht.DHTLIB_OK):      #read DHT11 and get a return value. Then determine whether data read is normal according to the return value.
@@ -28,14 +26,16 @@ def loop():
             with open(filename, "w") as f:
                 json.dump(data, f, indent=4)
 
+        dt = datetime.now()
+
         with open("data.json") as json_file:
             data = json.load(json_file)
             temp = data["data"]
-            y = {"temperature": dht.temperature, "humidity": dht.humidity, "measurement counts": counts}
+            y = {"temperature": dht.temperature, "humidity": dht.humidity, "date": dt}
             temp.append(y)
 
         write_json(data)
-        time.sleep(1800)
+        time.sleep(10)
         
 if __name__ == '__main__':
     print ('Program is starting ... ')
