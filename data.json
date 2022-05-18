@@ -1,8 +1,9 @@
 {
-  "Data": [
-    {
-      "Temperature": "25.00",
-      "Humidity": "5.00"
-    }
-  ]
+    "data": [
+        {
+            "temperature": 25.0,
+            "humidity": 5.0,
+            "measurement counts": 0
+        }
+    ]
 }
